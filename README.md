@@ -61,6 +61,7 @@
       <ul>
         <li><a href="#data-processing">Data Processing</a></li>
         <li><a href="#args-class">Args Class</a></li>
+        <li><a href="#conv-funct">Construct Conversations Function</a></li>
         <li><a href="#conv-class">ConversationDataset Class</a></li>
         <li><a href="#train">Train Function</a></li>
         <li><a href="#evalute">Evaluate Function</a></li>
@@ -119,16 +120,43 @@ Install all necessary libraries to run DialoGPT.ipynb
 
 ### Data Processing
 - Dataset is pulled from local storage "FB_Multi_Train.csv"
-- Preprocessing of Data required
+- Preprocessing of Data required:
+ - Tokenization
+ - End-of-Sentence Token addition
+ - Flattening Conversations
+ - Padding
+ - Caching Features
 
 ### Args Class
-- With the Transformers Library, the Args() class initializes the model and hyperparameters in a class for later args for training
-- Data is loaded and split into train and test sets
+- After importing the Transformers Library and various Pytorch imports, the Args() class is initialized
+  - This class defines a set of parameters for configuring the training process.
+  - Parameters include: 
+    - paths to model, tokenizer, and output directories
+    - batch sizes
+    - learning rates
+    - gradient accumulation steps
+    - number of epochs
+    - and various other training hyperparameters.
 
+
+### Construct Conversations Function
+- "construct_conv" function: 
+  - This function takes a conversation row, a tokenizer, and an optional argument eos (end-of-sentence)
+  - Encodes each utterance in the conversation using the tokenizer and appends an end-of-sentence token if "eos" is True.
+  - Conversation is flattened into a single list of token IDs
+  - Function returns the flattened list of token IDs representing the conversation.
 
 ### ConversationDataset Class
-- The ConversationDataset class takes tokenizer, args, a dataframe, and block size as parameters
-- This class helps generate the conversations and tensors
+- This class inherits from "Dataset", which is a PyTorch class for representing datasets in PyTorch.
+- The "init" method initializes the dataset.
+  - Takes parameters including a tokenizer, args (training arguments), df (Dataframe containing conversation data), and an optional "block_size" (sets the maximum length of the sequence)
+  - Checks if cached features exist and loads them if overwrite_cache parameter is set to False
+    - Otherwise, it creates features from the dataset and saves them.
+  - Constructs examples from the dataset by iterating over each row in the DataFrame.
+  - Encodes the conversation using the "construct_conv" function and adds it to the examples list if its length is less than block_size.
+
+  - __len__ method returns the total number of examples in the dataset.
+  - __getitem__ method retrieves an item from the dataset. It returns a PyTorch tensor containing the token IDs of the conversation at index item.
 
 ### Train Function
 - This function is responsible for training the model.
