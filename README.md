@@ -57,15 +57,27 @@
       </ul>
     </li>
     <li>
-      <a href="#dialogpt">DioloGPT Code: How it works</a>
-      <ul>
-        <li><a href="#data-processing">Data Processing</a></li>
-        <li><a href="#args-class">Args Class</a></li>
-        <li><a href="#conv-funct">Construct Conversations Function</a></li>
-        <li><a href="#conv-class">ConversationDataset Class</a></li>
-        <li><a href="#train">Train Function</a></li>
-        <li><a href="#evalute">Evaluate Function</a></li>
-      </ul>
+      <a href="#how-it-works">How it works</a>
+        <li>
+          <a href="dialogpt">DialoGPT</a>
+          <ul>
+            <li><a href="#data-processing">Data Processing</a></li>
+            <li><a href="#args-class">Args Class</a></li>
+            <li><a href="#conv-funct">Construct Conversations Function</a></li>
+            <li><a href="#conv-class">ConversationDataset Class</a></li>
+            <li><a href="#train">Train Function</a></li>
+            <li><a href="#evalute">Evaluate Function</a></li>
+          </ul>
+          <a href="#trltoxic">trltoxic</a>
+          <ul>
+            <li><a href="#trl-args">Script Arguments and Configuration</a></li>
+            <li><a href="#trl-dataset">Dataset Building</a></li>
+            <li><a href="#trl-init">Model Initialization</a></li>
+            <li><a href="#ppo-init">PPO Trainer Initialization</a></li>
+            <li><a href="#reward">Reward Pipeline Setup</a></li>
+            <li><a href="#ppo-train">PPO Training Loop and Model saving</a></li>
+          </ul>
+        </li>
     </li>
     <li>
       <a href="#trltoxic">trltoxic Code: How it works</a>
