@@ -57,7 +57,7 @@
       </ul>
     </li>
     <li>
-      <a href="#dialogpt">DioloGPT Code: How it works</a>
+      <a href="#dialogpt-code-how-it-works">DioloGPT Code: How it works</a>
       <ul>
         <li><a href="#data-processing">Data Processing</a></li>
         <li><a href="#args-class">Args Class</a></li>
@@ -68,7 +68,7 @@
       </ul>
     </li>
     <li>
-      <a href="#trltoxic">trltoxic Code: How it works</a>
+      <a href="#trltoxic-code-how-it-works">trltoxic Code: How it works</a>
       <ul>
         <li><a href="#trl-args">Script Arguments and Configuration</a></li>
         <li><a href="#trl-dataset">Dataset Building</a></li>
