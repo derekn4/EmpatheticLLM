@@ -57,27 +57,15 @@
       </ul>
     </li>
     <li>
-      <a href="#how-it-works">How it works</a>
-        <ul>
-          <a href="dialogpt">DialoGPT</a>
-          <ul>
-            <li><a href="#data-processing">Data Processing</a></li>
-            <li><a href="#args-class">Args Class</a></li>
-            <li><a href="#conv-funct">Construct Conversations Function</a></li>
-            <li><a href="#conv-class">ConversationDataset Class</a></li>
-            <li><a href="#train">Train Function</a></li>
-            <li><a href="#evalute">Evaluate Function</a></li>
-          </ul>
-          <a href="#trltoxic">trltoxic</a>
-          <ul>
-            <li><a href="#trl-args">Script Arguments and Configuration</a></li>
-            <li><a href="#trl-dataset">Dataset Building</a></li>
-            <li><a href="#trl-init">Model Initialization</a></li>
-            <li><a href="#ppo-init">PPO Trainer Initialization</a></li>
-            <li><a href="#reward">Reward Pipeline Setup</a></li>
-            <li><a href="#ppo-train">PPO Training Loop and Model saving</a></li>
-          </ul>
-        </ul>
+      <a href="#dialogpt">DioloGPT Code: How it works</a>
+      <ul>
+        <li><a href="#data-processing">Data Processing</a></li>
+        <li><a href="#args-class">Args Class</a></li>
+        <li><a href="#conv-funct">Construct Conversations Function</a></li>
+        <li><a href="#conv-class">ConversationDataset Class</a></li>
+        <li><a href="#train">Train Function</a></li>
+        <li><a href="#evalute">Evaluate Function</a></li>
+      </ul>
     </li>
     <li>
       <a href="#trltoxic">trltoxic Code: How it works</a>
@@ -139,7 +127,7 @@ Our primary objective is to develop an empathetic conversational agent that is s
 
 
 ## DioloGPT Code: How it works
-Install all necessary libraries to run DialoGPT.ipynb
+- Install all necessary libraries to run DialoGPT.ipynb
 
 ### Data Processing
 - Dataset is pulled from local storage "FB_Multi_Train.csv"
@@ -240,7 +228,6 @@ Below are some key steps and components of the script:
 - Training statistics are logged, and the model is periodically saved during training.
 - After training, the script saves the trained PPO model.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
