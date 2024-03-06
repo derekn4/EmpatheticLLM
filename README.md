@@ -53,20 +53,20 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#libaries-used">Libraries Used</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#how-it-works">How it Works</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#data-processing">Data Processing</a></li>
+        <li><a href="#args-class">Args Class</a></li>
+        <li><a href="#conv-class">ConversationDataset Class</a></li>
+        <li><a href="#train">Train Function</a></li>
+        <li><a href="#evalute">Evaluate Function</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -82,6 +82,16 @@ In this project, we aimed to build a conversational agent for mental health appl
 - Is self-aware (Knows when to not respond)
 - Doesn’t generate triggering responses
 
+Specifically, we graded the final model on these categories through Human Evaluations:
+- Natural Flow
+- Context Dependence
+- Topic Consistency
+- Speaker Consistency
+- Specificity
+- Interestingness
+
+Our primary objective is to develop an empathetic conversational agent that is specifically tailored for self-care and emotional support settings.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,91 +103,57 @@ In this project, we aimed to build a conversational agent for mental health appl
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-Since it's all in Python, we are going to need pip.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* pip
-  ```sh
-  pip install --upgrade pip
-  ```
-
-### Installation
-
-1. To get started with the Discord API [https://discord.com/developers/docs/intro](https://discord.com/developers/docs/intro)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/derekn4/CurfewBot.git
-   ```
-3. Install Python packages
-   ```sh
-   pip install -r /path/to/requirements.txt
-   ```
-4. Enter your API in `.env`
-   ```js
-   BOT_TOKEN="YOUR BOT TOKEN HERE"
-   ```
+### Libraries Used
+* HuggingFace
+* Transformers
+* Pytorch
+* Pandas
+* Sklearn
+* numpy
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+## How it Works
+Install all necessary libraries to run DialoGPT.ipynb
 
-<!-- USAGE EXAMPLES -->
-## Usage
+### Data Processing
+- Dataset is pulled from local storage "FB_Multi_Train.csv"
+- Preprocessing of Data required
 
-First, make sure that your Bot is enabled for the Discord server of intended use.
-Second, enable access to voice chat and text chats, as well as admin privileges. 
-
-Command to set a curfew:
-  - !curfew [time][AM/PM] [username]
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Args Class
+- With the Transformers Library, the Args() class initializes the model and hyperparameters in a class for later args for training
+- Data is loaded and split into train and test sets
 
 
+### ConversationDataset Class
+- The ConversationDataset class takes tokenizer, args, a dataframe, and block size as parameters
+- This class helps generate the conversations and tensors
 
-<!-- ROADMAP -->
-## Roadmap
+### Train Function
+- This function is responsible for training the model.
+- Initializes a TensorBoard writer for logging
+- Sets up training batch size and collation function for the DataLoader
+- Calculates total number of optimization steps based on the number of training examples, gradient accumulation steps, and number of epochs.
+- Initializes optimizer and scheduler for learning rate scheduling
+  - loads optimizer and scheduler states if they already exist
+- Initializes mixed precision training if "args.fp16" is enabled.
+- Sets up multi-GPU and distributed training if multiple GPUs are available.
+- Iterates through epochs and batches, calculates loss, performs backpropagation, and updates model parameters.
+- Logs training progress, evaluates the model periodically, and saves checkpoints.
+- Manages the maximum number of steps for training.
+- Closes the TensorBoard writer.
 
-- [X] Responds to command
-- [X] Adds user to database with cutoff time
-- [X] Kicks user out of voice call
-    - [X] Continues to kick user out of voice channels until curfew is up
-    - [X] Mentions and shames user in General chat if they try to join before curfew is over
-- [ ] Push CurfewBot to server to run remotely and not local.
-
-See the [open issues](https://github.com/derekn4/CurfewBot/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Evalute Function
+- This function evaluates the model performance on a validation dataset.
+- Sets up the evaluation batch size and collation function for the DataLoader.
+- Initializes a DataLoader for the evaluation dataset.
+- Performs evaluation by iterating through batches, calculating loss, and accumulating evaluation metrics.
+- Computes the perplexity metric based on the evaluation loss.
+- Logs evaluation results and writes them to an output file.
+- Returns the evaluation results as a dictionary.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-
-
 
 <!-- CONTACT -->
 ## Contact
@@ -186,7 +162,7 @@ Derek Nguyen
 - [LinkedIn](https://www.linkedin.com/in/derekhuynguyen/) 
 - [Email](derek.nguyen99@gmail.com)
 <br></br>
-Project Link: [https://github.com/derekn4/CurfewBot](https://github.com/derekn4/CurfewBot)
+Project Link: [https://github.com/derekn4/EmpatheticLLM](https://github.com/derekn4/EmpatheticLLM)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
