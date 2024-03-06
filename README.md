@@ -57,7 +57,7 @@
       </ul>
     </li>
     <li>
-      <a href="#how-it-works">How it Works</a>
+      <a href="#dialogpt">DioloGPT Code: How it works</a>
       <ul>
         <li><a href="#data-processing">Data Processing</a></li>
         <li><a href="#args-class">Args Class</a></li>
@@ -65,6 +65,17 @@
         <li><a href="#conv-class">ConversationDataset Class</a></li>
         <li><a href="#train">Train Function</a></li>
         <li><a href="#evalute">Evaluate Function</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#trltoxic">trltoxic Code: How it works</a>
+      <ul>
+        <li><a href="#trl-args">Script Arguments and Configuration</a></li>
+        <li><a href="#trl-dataset">Dataset Building</a></li>
+        <li><a href="#trl-init">Model Initialization</a></li>
+        <li><a href="#ppo-init">PPO Trainer Initialization</a></li>
+        <li><a href="#reward">Reward Pipeline Setup</a></li>
+        <li><a href="#ppo-train">PPO Training Loop and Model saving</a></li>
       </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
@@ -115,7 +126,7 @@ Our primary objective is to develop an empathetic conversational agent that is s
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-## How it Works
+## DioloGPT Code: How it works
 Install all necessary libraries to run DialoGPT.ipynb
 
 ### Data Processing
@@ -180,6 +191,42 @@ Install all necessary libraries to run DialoGPT.ipynb
 - Computes the perplexity metric based on the evaluation loss.
 - Logs evaluation results and writes them to an output file.
 - Returns the evaluation results as a dictionary.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## trltoxic Code: How it works
+This script performs fine-tuning of a language model using the Proximal Policy Optimization (PPO) algorithm to generate less toxic text.
+Hence, "trl" for Transformer Reinforcement Learning.
+
+Below are some key steps and components of the script:
+
+### Script Arguments and Configuration
+- The script uses dataclass to define script arguments such as the model name, learning rate, mini-batch size, etc.
+- It uses HfArgumentParser to parse the arguments and configure the PPO training.
+
+### Dataset Building
+- The build_dataset function is defined to prepare the dataset for training. 
+- It loads the data from a CSV file, tokenizes it, filters out short samples, and splits it into training and validation sets.
+
+### Model Initialization
+- The script loads a pretrained language model for causal language modeling (LM). 
+- It then creates a value head for the LM using AutoModelForCausalLMWithValueHead.
+
+### PPO Trainer Initialization
+- It initializes a PPOTrainer object, which orchestrates the PPO training process. 
+- This includes setting up the model, reference model, tokenizer, optimizer, and dataset.
+
+### Reward Pipeline Setup
+- The script loads a toxicity detection model (RoBERTa) and tokenizer. 
+- It defines the generation arguments and output length sampler.
+
+### PPO Training Loop and Model saving
+- Inside the training loop, it iterates over the dataset and generates responses using the policy model.
+- Sentiment scores (toxicity labels) are computed for the generated responses using the toxicity model.
+- PPO steps are performed to optimize the policy based on the generated responses and rewards.
+- Training statistics are logged, and the model is periodically saved during training.
+- After training, the script saves the trained PPO model.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
