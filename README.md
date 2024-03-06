@@ -32,14 +32,8 @@
   <p align="center">
     Training a GPT2 model with conversational data to demonstrate empathetic dialogues.
     <br />
-    <a href="https://github.com/derekn4/CurfewBot"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/derekn4/EmpatheticLLM"><strong>Explore the docs »</strong></a>
     <br />
-    <br />
-    <a href="https://github.com/derekn4/CurfewBot">View Demo</a>
-    ·
-    <a href="https://github.com/derekn4/CurfewBot/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/derekn4/CurfewBot/issues">Request Feature</a>
   </p>
 </div>
 
