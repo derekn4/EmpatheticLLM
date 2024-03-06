@@ -58,7 +58,7 @@
     </li>
     <li>
       <a href="#how-it-works">How it works</a>
-        <li>
+        <ul>
           <a href="dialogpt">DialoGPT</a>
           <ul>
             <li><a href="#data-processing">Data Processing</a></li>
@@ -77,7 +77,7 @@
             <li><a href="#reward">Reward Pipeline Setup</a></li>
             <li><a href="#ppo-train">PPO Training Loop and Model saving</a></li>
           </ul>
-        </li>
+        </ul>
     </li>
     <li>
       <a href="#trltoxic">trltoxic Code: How it works</a>
